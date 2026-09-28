@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bonabola · Briefing de vídeos — Navy Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0C0B; --card:#0F1311; --card-2:#0C0F0D;
+    --border:rgba(124,239,174,.15); --border-soft:rgba(255,255,255,.07);
+    --white:#EEF3EF; --muted:#8A9C92; --dim:#5F6E66;
+    --mint:#7BEFAE; --mint-dim:#57C98C;
+    --g1:#26B588; --g2:#4C7DF0; --g3:#E8913C;
+    --disp:'Hanken Grotesk',system-ui,sans-serif; --mono:'IBM Plex Mono',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--disp);background:var(--bg);color:var(--white);line-height:1.5;-webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(rgba(124,239,174,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(124,239,174,.028) 1px,transparent 1px);
+    background-size:46px 46px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 26px}
+  ::selection{background:var(--mint);color:#04120A}
+
+  .hero{position:relative;padding:74px 0 52px;overflow:hidden}
+  .hero::after{content:"";position:absolute;right:-8%;top:-30%;width:640px;height:640px;border-radius:50%;
+    background:radial-gradient(circle,rgba(124,239,174,.10),transparent 62%);pointer-events:none}
+  .hero>*{position:relative}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--mint);font-weight:600}
+  h1{font-weight:900;font-size:clamp(38px,6.6vw,74px);line-height:.98;letter-spacing:-.025em;margin:26px 0 0}
+  h1 em{font-style:normal;color:var(--mint)}
+  .lede{max-width:640px;margin-top:26px;color:var(--muted);font-size:17px;line-height:1.6}
+  .meta{margin-top:34px;display:flex;flex-wrap:wrap;gap:8px 34px;font-family:var(--mono);font-size:12.5px}
+  .meta span{color:var(--mint-dim)}
+  .meta b{color:var(--white);font-weight:600}
+
+  .why{margin-top:34px;background:rgba(124,239,174,.05);border:1px solid rgba(124,239,174,.18);border-radius:16px;padding:24px 26px}
+  .why h3{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mint);margin-bottom:14px}
+  .why ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+  .why li{position:relative;padding-left:22px;font-size:15px;color:#C4D2CA;line-height:1.55}
+  .why li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+  .why li b{color:#fff;font-weight:600}
+
+  nav.toc{position:sticky;top:0;z-index:20;background:rgba(10,12,11,.86);backdrop-filter:blur(10px);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
+  nav.toc .wrap{display:flex;gap:30px;overflow-x:auto;padding-top:15px;padding-bottom:15px}
+  nav.toc a{flex:0 0 auto;font-family:var(--mono);font-size:12px;color:var(--dim);text-decoration:none;white-space:nowrap;transition:color .15s}
+  nav.toc a:hover{color:var(--white)}
+
+  .momento{padding:58px 0 4px}
+  .m-title{display:flex;align-items:center;gap:16px}
+  .m-bar{width:8px;height:38px;border-radius:5px;flex:0 0 auto}
+  .m-title h2{font-weight:800;font-size:clamp(24px,3.6vw,34px);letter-spacing:-.02em;line-height:1.05}
+  .m-sub{font-family:var(--mono);font-size:11.5px;letter-spacing:.13em;text-transform:uppercase;margin:14px 0 0 24px;font-weight:600}
+  .m-intro{color:var(--muted);max-width:660px;font-size:15.5px;margin:12px 0 30px 24px}
+
+  .card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px 30px;margin-bottom:22px}
+  .card-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+  .fmt{display:flex;align-items:center;gap:13px}
+  .fmt .n{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--muted);border:1px solid var(--border-soft);border-radius:7px;padding:4px 8px;background:var(--card-2)}
+  .fmt .name{font-weight:700;font-size:18px;letter-spacing:-.01em}
+  .badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;color:var(--muted);border:1px solid var(--border-soft);border-radius:100px;padding:6px 13px 6px 11px;white-space:nowrap}
+  .badge .d{width:8px;height:8px;border-radius:50%}
+  .rowmeta{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:16px;font-size:14px;color:var(--muted)}
+  .rowmeta b{color:var(--white);font-weight:600}
+  .rowmeta .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--dim);margin-right:7px}
+
+  .hook{margin:22px 0 4px;padding:18px 22px;border-radius:13px;background:var(--card-2);border-left:4px solid var(--white)}
+  .hook .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:9px}
+  .hook p{font-size:20px;font-weight:700;line-height:1.32;letter-spacing:-.012em;color:#fff}
+
+  .block{margin-top:22px}
+  .block h4{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:12px}
+  .beats{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .beats li{position:relative;padding-left:22px;font-size:15px;color:#C4D2CA;line-height:1.5}
+  .beats li::before{content:"";position:absolute;left:2px;top:8px;width:7px;height:7px;border-radius:50%;background:var(--mint)}
+
+  .retain{margin-top:20px;background:rgba(124,239,174,.05);border:1px solid rgba(124,239,174,.18);border-radius:13px;padding:15px 18px}
+  .retain h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--mint);margin-bottom:7px}
+  .retain p{font-size:14.5px;color:#AFCBBB}
+
+  .cta{margin-top:20px;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;padding-top:18px;border-top:1px dashed var(--border-soft)}
+  .cta .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim)}
+  .cta p{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.01em}
+
+  .note{margin-top:18px;background:rgba(232,145,60,.07);border:1px solid rgba(232,145,60,.26);border-radius:13px;padding:14px 18px}
+  .note h4{font-family:var(--mono);font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:#E8A85F;margin-bottom:7px}
+  .note p{font-size:14px;color:#D6BE9E}
+
+  .ref{margin:0 0 30px 24px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px 26px}
+  .ref h4{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--mint);margin-bottom:12px}
+  .ref p{font-size:15px;color:#C4D2CA;line-height:1.7}
+  .ref .vo{color:#fff;font-weight:600}
+  .ref .checks{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .ref .checks span{font-family:var(--mono);font-size:11.5px;color:var(--mint);border:1px solid var(--border);border-radius:100px;padding:5px 12px}
+
+  footer{border-top:1px solid var(--border-soft);margin-top:64px;padding:44px 0 60px}
+  footer .fnote{font-size:14.5px;max-width:680px;color:var(--muted);line-height:1.6}
+  footer .sig{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--mint-dim);margin-top:18px}
+
+  @media(max-width:680px){
+    .card{padding:22px 20px}
+    .hook p{font-size:18px}
+    nav.toc .wrap{gap:22px}
+    .m-sub,.m-intro,.ref{margin-left:0}
+  }
+.ref a{color:var(--mint);text-decoration:none;border-bottom:1px solid rgba(123,239,174,.35)}
+.ref a:hover{border-bottom-color:var(--mint)}
+.reflist{margin:10px 0 0;padding:0;list-style:none}
+.reflist li{padding:7px 0;border-top:1px solid var(--line);font-size:14px;line-height:1.5}
+.reflist li:first-child{border-top:none}
+.reflist .vo{color:var(--ink-3)}
+.perfiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+.perfil{border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.perfil b{display:block;font-size:15px;margin-bottom:2px}
+.perfil span{display:block;font-size:13px;color:var(--ink-3);margin-bottom:6px}
+.perfil a{font-size:13px;color:var(--mint);text-decoration:none;border-bottom:1px solid rgba(123,239,174,.35)}
+@media(max-width:700px){.perfiles{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Bonabola · Briefing de vídeos · Septiembre 2026</p>
+    <h1>Seis formatos para que<br><em>un ad parezca un reel más</em></h1>
+    <p class="lede">Estudiamos a Secco, a Pádel Nuestro y a las cuentas de pádel que más se ven en TikTok. Todas coinciden en lo mismo: el contenido que funciona tiene gente dentro, no producto solo. Cada ficha trae el gancho exacto, la idea del cuerpo, qué retiene y el cierre. El guion literal y el rodaje son vuestros.</p>
+    <div class="meta">
+      <span><b>Marca</b> · Bonabola</span>
+      <span><b>Preparado por</b> · Navy Marketing</span>
+      <span><b>Entregable</b> · 6 vídeos</span>
+      <span><b>Vertical</b> · 9:16 · Reels + TikTok</span>
+      <span><b>Uso</b> · orgánico y anuncio</span>
+    </div>
+
+    <div class="why">
+      <h3>Antes de grabar</h3>
+      <ul>
+        <li><b>El producto solo no funciona.</b> Es el dato más claro de todo el estudio: el mejor vídeo de Secco tiene 635.000 visitas y su pala sobre fondo blanco tiene 431. La misma cuenta, el mismo producto. Lo único que cambia es si sale alguien.</li>
+        <li><b>Grabado con móvil y sin producción.</b> El vídeo de Ryze Padel con 7,8 millones está borroso y grabado a pulso. La calidad de imagen no es lo que retiene.</li>
+        <li><b>A quien ya juega, no a quien empieza.</b> El público es el jugador que quiere subir de nivel. El contenido tiene que sonar a alguien que sabe de pádel, no a marca explicando qué es una pala.</li>
+        <li><b>Nada que parezca IA.</b> Personas reales, pista real, luz real.</li>
+        <li><b>Lo que sí se puede afirmar:</b> hecho a mano, fábrica propia en España, testado de forma independiente, menos vibraciones. Sin cifras inventadas y sin precio salvo que se indique.</li>
+        <li><b>Todo en vertical 9:16</b>, pensado para que valga igual en Reels, en TikTok y como anuncio.</li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <div class="wrap">
+    <a href="#g1">Marca (2)</a>
+    <a href="#g2">Jugador (2)</a>
+    <a href="#g3">Producto (2)</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="momento" id="g1">
+    <div class="m-title"><span class="m-bar" style="background:var(--g1)"></span><h2>Marca</h2></div>
+    <p class="m-sub" style="color:var(--g1)">Quién hay detrás y cómo se hace · 2 vídeos</p>
+    <p class="m-intro">Es el territorio donde Bonabola ya tiene señal propia: el vídeo del taller tiene un 41,7% de visualización completa y el reel del gripping es el que más interacción genera. Y es el mismo territorio que ha hecho crecer a Secco. Nadie más en el pádel español está contando esto.</p>
+
+    <div class="ref">
+      <h4>La referencia · lo que hace Secco</h4>
+      <p><span class="vo">«Cómo lanzar una marca de pádel y no morir en el intento»</span> — los dos fundadores en el taller, revisando muestras. <b>635.000 visitas.</b> Los pedidos firmándose a mano sobre la mesa: <b>131.000.</b> Los dos hermanos eligiendo colores: <b>19.900.</b></p>
+      <ul class="reflist">
+        <li><a href="https://www.instagram.com/secco_brand/">@secco_brand</a> — <span class="vo">en la pestaña de reels están los tres, ordenados por visitas. Son los primeros de la parrilla.</span></li>
+        <li><a href="https://www.instagram.com/reel/Czt4FLTr1lq/">Secco · «Cómo lanzar una marca de pádel y no morir en el intento»</a> — <span class="vo">los dos fundadores en el taller. 635.000 visitas.</span></li>
+        <li><a href="https://www.youtube.com/channel/UCNnxZ-lhpBuvDKV45YOmFLA">Canal de YouTube de Secco</a> — <span class="vo">la serie completa de «Cómo lanzar una marca de pádel y no morir en el intento».</span></li>
+        <li><a href="https://www.instagram.com/p/DM-pACKIQee/">RYZE · «We started our padel brand from nothing»</a> — <span class="vo">el mismo formato en inglés, por si se decide grabar en ese idioma.</span></li>
+      </ul>
+      <div class="checks"><span>Taller</span><span>Manos</span><span>Proceso</span><span>Sin guion</span><span>Sin vender</span></div>
+    </div>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">01</span><span class="name">Así sale una pala de aquí</span></div>
+        <span class="badge"><span class="d" style="background:var(--g1)"></span>Detrás de la marca</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Quien no conoce Bonabola</b> y se topa con el vídeo</span><span><span class="k">Dónde</span><b>Reels + TikTok</b> · también ad de marca</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“Así sale una pala de aquí antes de llegar a una pista.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>El recorrido completo: el material en bruto, el molde, las manos trabajando, el acabado.</li>
+          <li>Que se oiga el taller. Sin música épica encima, el sonido real vale más.</li>
+          <li>Un momento de revisión: alguien mirando una pala de cerca antes de darla por buena.</li>
+          <li>Termina con la pala acabada. El vídeo se cierra cuando la pieza está lista.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>El gancho promete ver algo terminarse, y eso obliga a quedarse hasta el final. Es el mismo mecanismo que sostiene los vídeos de fabricación de Secco y el del gripping de Bonabola. Aquí no se vende nada: se enseña.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Hecha a mano en España, una a una. Bonabola.”</p></div>
+      <p class="note">⚑ Esta pieza ya tiene señal · El vídeo del taller de Bonabola tiene un 41,7% de visualización completa. Es el formato que mejor retiene de toda la cuenta y el que menos se está explotando.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">02</span><span class="name">Lo que no se ve de montar esto</span></div>
+        <span class="badge"><span class="d" style="background:var(--g1)"></span>Cara a cámara</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Quien ya os sigue</b> o acaba de descubriros</span><span><span class="k">Dónde</span><b>Reels + TikTok</b> · también ad a perfil</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“Montar una marca de palas suena muy bien hasta que te toca hacerlo.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>Uno de vosotros hablando al móvil, en el taller o donde toque. Sin trípode y sin guion.</li>
+          <li>Algo concreto que ha costado: una producción que se retrasó, un acabado que hubo que repetir, un pedido que salió mal.</li>
+          <li>Qué se ha aprendido de eso y qué viene ahora.</li>
+          <li>Sin pedir nada al final. El vídeo no lleva a ningún sitio.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>Reconocer una dificultad en voz alta desarma a quien está mirando, porque no suena a marca. Es lo que hace Secco con frases como «nervios, dudas y mucho por hacer», y le funciona: su cara a cámara anunciando un restock tiene 78.500 visitas.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Si te interesa cómo se hace una pala de verdad, por aquí lo vamos contando.”</p></div>
+    </article>
+  </section>
+
+  <section class="momento" id="g2">
+    <div class="m-title"><span class="m-bar" style="background:var(--g2)"></span><h2>Jugador</h2></div>
+    <p class="m-sub" style="color:var(--g2)">Lo que le pasa a quien juega · 2 vídeos</p>
+    <p class="m-intro">Es el territorio con más alcance de todos y el más barato de producir. En TikTok las cuentas de pádel que se mueven en millones no enseñan producto: enseñan técnica y situaciones reconocibles. Son los dos formatos que más se comparten, y compartir es lo que multiplica el alcance.</p>
+
+    <div class="ref">
+      <h4>La referencia · las cifras son de TikTok</h4>
+      <p><b>The Padel School</b>, un entrenador en pista con marcas en el suelo explicando una mecánica: <b>11,4 millones.</b> <b>Ryze Padel</b>, un vídeo borroso grabado a pulso con el rótulo «POV: recibes un globo»: <b>7,8 millones y 72.000 compartidos.</b> <b>Pádel Nuestro</b> con el chiste del coach: <b>63.900.</b></p>
+      <ul class="reflist">
+        <li><a href="https://www.tiktok.com/@thepadelschool/video/7263759691858152737?lang=en">The Padel School · «Mastering the double glass»</a> — <span class="vo">el vídeo de los 11,4 millones. Un entrenador en pista usando la línea del suelo como referencia. Agosto de 2023.</span></li>
+        <li><a href="https://www.instagram.com/thepadelschool/">@thepadelschool en Instagram</a> — <span class="vo">249.000 seguidores. Toda su parrilla es técnica en pista: es la referencia del formato.</span></li>
+        <li><a href="https://www.tiktok.com/@ryzepadel/video/7216408487671254299">RYZE · «POV: You receive a lob»</a> — <span class="vo">7,8 millones y 72.000 compartidos. Vídeo borroso, grabado a pulso, con el rótulo desde el primer fotograma.</span></li>
+        <li><a href="https://www.instagram.com/ryzepadel/reel/DBtM02Oo5Jm/">RYZE · «There's always ONE»</a> — <span class="vo">el mismo formato en Instagram, para ver cómo lo adaptan.</span></li>
+        <li><a href="https://www.instagram.com/reel/DdeSDQaIEcO/">Pádel Nuestro · «Mi coach me dice que voy bien, solo me falta:»</a> — <span class="vo">humor de padelero con rótulo en pantalla. 63.900 visitas.</span></li>
+        <li><a href="https://www.instagram.com/reel/DdbY1YaNABb/">Pádel Nuestro · «POV: Jensen cuando juega vs Coello»</a> — <span class="vo">45.700 visitas.</span></li>
+        <li><a href="https://www.instagram.com/reel/DdY0JDghSLY/">Pádel Nuestro · «De cero a PRO», capítulo 19</a> — <span class="vo">la serie numerada que sostiene unas 47.500 visitas por entrega.</span></li>
+      </ul>
+      <div class="checks"><span>Móvil</span><span>Pista</span><span>Rótulo en pantalla</span><span>Sin edición</span><span>Se comparte</span></div>
+    </div>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">03</span><span class="name">El smash que no mata</span></div>
+        <span class="badge"><span class="d" style="background:var(--g2)"></span>Técnica</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Jugador que quiere subir de nivel</b></span><span><span class="k">Dónde</span><b>Reels + TikTok</b> · el formato que más se guarda</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“Meter un smash con todas tus fuerzas es la forma más rápida de perder el punto.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>Enseñar el error primero: el smash a lo bruto. La bola se va larga o vuelve rebotada de la pared.</li>
+          <li>Marcar en el suelo con cinta o conos dónde debería caer la bola. Que se vea la diferencia sin explicarla.</li>
+          <li>Repetir el smash colocado en lugar de fuerte, desde el mismo plano, para que se aprecie el cambio.</li>
+          <li>La pala está presente todo el rato, pero nunca es el tema.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>El gancho contradice lo que el espectador da por hecho, y eso obliga a quedarse a por la explicación. El smash además lo conoce cualquiera que haya jugado dos veces, así que el gancho no deja a nadie fuera. Es el formato que más se guarda, porque la gente lo archiva para probarlo luego.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Pruébalo en el próximo partido y nos dices.”</p></div>
+      <p class="note">⚑ El consejo lo valida quien graba · La estructura de la ficha es lo que importa: error primero, marcas en el suelo, golpe corregido después. El consejo técnico concreto tiene que darlo alguien que juegue, porque el público sabe de pádel y un consejo flojo resta credibilidad.</p>
+      <p class="note">⚑ Puede ser serie · Este es el formato que mejor aguanta convertido en serie numerada. Pádel Nuestro lleva 20 capítulos de «De cero a PRO» sosteniendo 47.500 visitas por entrega. Si funciona, se numera y se repite cada semana.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">04</span><span class="name">POV: el compañero</span></div>
+        <span class="badge"><span class="d" style="background:var(--g2)"></span>POV y humor</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Cualquiera que juegue</b>, conozca o no la marca</span><span><span class="k">Dónde</span><b>TikTok + Reels</b> · el de más alcance</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“POV: te toca el que solo sabe rematar.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>El rótulo aparece desde el primer fotograma. Es el gancho, y sin él el vídeo no funciona.</li>
+          <li>Una escena corta y actuada, exagerada a propósito. Dos jugadores bastan.</li>
+          <li>La pala se ve porque está en la mano, no porque se enseñe.</li>
+          <li>Corto: cuanto antes acabe, más veces se reproduce entero.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>Es humor de dentro: solo lo pilla quien juega, y por eso se comparte y se etiqueta. El caso de Ryze demuestra que la calidad de imagen da igual — su vídeo está borroso y suma 7,8 millones con 72.000 compartidos.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Etiqueta al tuyo.”</p></div>
+      <p class="note">⚑ Este no lleva marca · Aquí no va logo ni mensaje de producto. Funciona porque no parece publicidad, y en cuanto lo parece deja de compartirse.</p>
+    </article>
+  </section>
+
+  <section class="momento" id="g3">
+    <div class="m-title"><span class="m-bar" style="background:var(--g3)"></span><h2>Producto</h2></div>
+    <p class="m-sub" style="color:var(--g3)">La pala, pero siempre con alguien · 2 vídeos</p>
+    <p class="m-intro">Es el único bloque donde el producto manda, y aun así necesita a una persona dentro. Los vídeos de producto de Pádel Nuestro que funcionan tienen todos a alguien sosteniendo la pala: 141.000, 86.200 y 61.400 visitas. Los que no, se quedan en cuatro cifras.</p>
+
+    <div class="ref">
+      <h4>La referencia · el contraste que lo prueba</h4>
+      <p>Secco, con producto <b>en manos de alguien en pista</b>: 7.726 visitas. Su mochila <b>sobre el sofá</b>: 5.023. Su pala <b>sobre fondo blanco, sin nadie</b>: <b>431.</b> El salto no lo da la calidad de la foto, lo da la persona.</p>
+      <ul class="reflist">
+        <li><a href="https://www.instagram.com/secco_brand/">@secco_brand</a> — <span class="vo">el contraste se ve bajando por su parrilla de reels: los de producto solo son los del final, con cuatro cifras.</span></li>
+        <li><a href="https://www.instagram.com/p/C-uXz8qorOh/">RYZE · presentación de pala</a> — <span class="vo">producto, pero siempre con alguien usándola.</span></li>
+        <li><a href="https://www.instagram.com/reel/DdoC4X6NfIn/">Pádel Nuestro · «Así es la nueva colección Luxury de Nox»</a> — <span class="vo">producto en mano, no sobre una mesa. 141.000 visitas.</span></li>
+      </ul>
+      <div class="checks"><span>En mano</span><span>En pista</span><span>En uso</span><span>Nunca sola</span></div>
+    </div>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">05</span><span class="name">Un mes con la misma pala</span></div>
+        <span class="badge"><span class="d" style="background:var(--g3)"></span>Producto con persona</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Quien ya os conoce</b> y no se ha decidido</span><span><span class="k">Dónde</span><b>Reels</b> · también ad de conversión</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“Llevo un mes jugando con esta y hay algo que no esperaba.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>Habla un jugador real, no la marca. Mejor alguien que la use de verdad.</li>
+          <li>Algo concreto que ha notado: el tacto, el control, cómo aguanta, el brazo al final del partido.</li>
+          <li>Planos de la pala en uso mientras habla, no de la pala quieta.</li>
+          <li>Que diga también lo que le costó al principio. La duda hace creíble el resto.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>El gancho anuncia una sorpresa sin decir cuál, así que hay que quedarse a saberla. Y quien habla es alguien como el espectador, no la marca, que es justo lo que baja la guardia.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Si no sabes cuál te pega, en el perfil hay un test de tres preguntas.”</p></div>
+      <p class="note">⚑ Enlaza con el recomendador · El cierre lleva al test de tres preguntas que ya está en marcha, así que este vídeo sirve como contenido y como captación de leads sin cambiar nada.</p>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <div class="fmt"><span class="n">06</span><span class="name">Abrirla por primera vez</span></div>
+        <span class="badge"><span class="d" style="background:var(--g3)"></span>Producto con persona</span>
+      </div>
+      <div class="rowmeta"><span><span class="k">Para</span><b>Quien está a punto de comprar</b></span><span><span class="k">Dónde</span><b>Reels + TikTok</b> · también ad</span></div>
+      <div class="hook"><div class="lbl">Gancho</div><p>“Esto es lo que te encuentras cuando abres una Bonabola.”</p></div>
+      <div class="block"><h4>Idea del cuerpo</h4>
+        <ul class="beats">
+          <li>Manos abriendo la caja, en plano cerrado. Sin cortes rápidos.</li>
+          <li>Enseñar los detalles que no se ven en la web: el acabado, el grip, el peso al cogerla.</li>
+          <li>El primer golpe justo después, en pista, con el sonido real.</li>
+          <li>Nada de rótulos de oferta. Esto es producto, no promoción.</li>
+        </ul>
+      </div>
+      <div class="retain"><h4>Qué mantiene la atención</h4><p>Abrir algo es de los formatos que mejor retienen porque el espectador quiere ver qué hay dentro. Y termina en pista, que es donde se resuelve la pregunta de verdad: cómo suena y cómo se siente.</p></div>
+      <div class="cta"><span class="lbl">Cierre</span><p>“Hecha a mano en España. Si quieres verla de cerca, está en la web.”</p></div>
+    </article>
+  </section>
+
+<section class="momento">
+    <div class="m-title"><span class="m-bar" style="background:var(--mint)"></span><h2>Perfiles para mirar</h2></div>
+    <p class="m-sub" style="color:var(--mint)">Las cuatro cuentas que sostienen este briefing</p>
+    <p class="m-intro">Antes de grabar nada, merece la pena dedicar diez minutos a bajar por estas cuatro parrillas. Se ve muy rápido qué formatos suben y cuáles se hunden, porque Instagram muestra las visitas de cada reel.</p>
+    <div class="ref">
+      <h4>Una excepción que conviene mirar, pero no copiar</h4>
+      <p><a href="https://www.instagram.com/reel/DQuJt3ajSHI/">Pádel Nuestro · «You're one of us»</a> — <b>4 millones de visitas.</b> Es su spot de marca, con producción de agencia, plató y jugadores profesionales. Está aquí porque marca el techo de la categoría, pero no es el camino de Bonabola: todo lo demás de este briefing se graba con un móvil y llega a cientos de miles.</p>
+    </div>
+    <div class="perfiles">
+      <div class="perfil"><b>Secco</b><span>19.000 seguidores · 163 publicaciones · marca española de palas</span><a href="https://www.instagram.com/secco_brand/">instagram.com/secco_brand</a></div>
+      <div class="perfil"><b>The Padel School</b><span>249.000 seguidores · técnica y coaching</span><a href="https://www.instagram.com/thepadelschool/">instagram.com/thepadelschool</a></div>
+      <div class="perfil"><b>RYZE Padel</b><span>21.000 seguidores · marca danesa · POV y humor</span><a href="https://www.instagram.com/ryzepadel/">instagram.com/ryzepadel</a></div>
+      <div class="perfil"><b>Pādel Nuestro</b><span>149.000 seguidores · series, humor y producto</span><a href="https://www.instagram.com/padelnuestro/">instagram.com/padelnuestro</a></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="fnote">Navy define el formato, el gancho exacto, la idea del cuerpo y el cierre de cada vídeo. El guion literal y el rodaje quedan a cargo del equipo de Bonabola. Seis vídeos en vertical: dos de marca, dos de jugador y dos de producto, todos pensados para funcionar igual como contenido orgánico y como anuncio. Un apunte pendiente: en el plan de Q4 está anotado quedarse con el inglés como único idioma. Los ganchos de este briefing están en español; si se cierra esa decisión, se adaptan antes de grabar.</p>
+    <p class="sig">Navy Marketing · Bonabola · Septiembre 2026 · Confidencial</p>
+  </div>
+</footer>
+
+</body>
+</html>
